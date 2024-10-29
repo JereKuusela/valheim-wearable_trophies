@@ -6,7 +6,7 @@ public class WearableTrophies : BaseUnityPlugin
 {
   public const string GUID = "wearable_trophies";
   public const string NAME = "Wearable Trophies";
-  public const string VERSION = "1.8";
+  public const string VERSION = "1.9";
   readonly ServerSync.ConfigSync ConfigSync = new(GUID)
   {
     DisplayName = NAME,
