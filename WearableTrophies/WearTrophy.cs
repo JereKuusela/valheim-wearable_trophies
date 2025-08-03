@@ -9,8 +9,8 @@ public class UseItem
   {
     if (!Helper.IsLocalPlayer(__instance)) return;
     if (!Configuration.Trophies) return;
-    if (item.m_shared.m_itemType != ItemDrop.ItemData.ItemType.Trophy) return;
     var vanity = Configuration.IsVanity();
+    if (!vanity && item.m_shared.m_itemType != ItemDrop.ItemData.ItemType.Trophy) return;
     if (vanity)
     {
       QueuedAction.Vanity = true;

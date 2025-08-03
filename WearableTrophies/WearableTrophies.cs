@@ -1,12 +1,13 @@
 ﻿using BepInEx;
 using HarmonyLib;
 namespace WearableTrophies;
+
 [BepInPlugin(GUID, NAME, VERSION)]
 public class WearableTrophies : BaseUnityPlugin
 {
   public const string GUID = "wearable_trophies";
   public const string NAME = "Wearable Trophies";
-  public const string VERSION = "1.9";
+  public const string VERSION = "1.10";
   readonly ServerSync.ConfigSync ConfigSync = new(GUID)
   {
     DisplayName = NAME,

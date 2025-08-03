@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 namespace WearableTrophies;
 
 public static class VanityEquipment
@@ -189,32 +190,48 @@ public static class VanityEquipment
     if (item == null) return false;
     if (inventory == null) return false;
     if (!Configuration.ForceSlot) forceSlot = null;
-    if (Configuration.Armor && (forceSlot == VisSlot.Helmet || item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Helmet || (Configuration.Trophies && item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Trophy)))
+    var slot = forceSlot;
+    if (slot == null)
+    {
+      if (item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Helmet || item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Trophy)
+        slot = VisSlot.Helmet;
+      else if (item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Chest)
+        slot = VisSlot.Chest;
+      else if (item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Shoulder)
+        slot = VisSlot.Shoulder;
+      else if (item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Legs)
+        slot = VisSlot.Legs;
+      else if (item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Utility)
+        slot = VisSlot.Utility;
+      else if (Helper.IsWeapon(item))
+        slot = left ? VisSlot.HandLeft : VisSlot.HandRight;
+    }
+    if (Configuration.Armor && slot == VisSlot.Helmet)
     {
       if (Helmet != null) Unequip(inventory, Helmet);
       Helmet = item;
     }
-    else if (Configuration.Armor && (forceSlot == VisSlot.Chest || item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Chest))
+    else if (Configuration.Armor && slot == VisSlot.Chest)
     {
       if (Chest != null) Unequip(inventory, Chest);
       Chest = item;
     }
-    else if (Configuration.Armor && (forceSlot == VisSlot.Shoulder || item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Shoulder))
+    else if (Configuration.Armor && slot == VisSlot.Shoulder)
     {
       if (Shoulders != null) Unequip(inventory, Shoulders);
       Shoulders = item;
     }
-    else if (Configuration.Armor && (forceSlot == VisSlot.Legs || item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Legs))
+    else if (Configuration.Armor && slot == VisSlot.Legs)
     {
       if (Legs != null) Unequip(inventory, Legs);
       Legs = item;
     }
-    else if (Configuration.Armor && (forceSlot == VisSlot.Utility || item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Utility))
+    else if (Configuration.Armor && slot == VisSlot.Utility)
     {
       if (Utility != null) Unequip(inventory, Utility);
       Utility = item;
     }
-    else if (Configuration.Weapons && (forceSlot == VisSlot.HandLeft || forceSlot == VisSlot.HandRight || Helper.IsWeapon(item)))
+    else if (Configuration.Weapons && (slot == VisSlot.HandLeft || slot == VisSlot.HandRight || Helper.IsWeapon(item)))
     {
       if (back)
       {

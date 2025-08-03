@@ -1,3 +1,7 @@
+- v1.10
+  - Fixes some gear not working in every slot (still most combinations don't work but at least the mod doesn't limit it anymore).
+  - Fixes consumables not being equippable.
+
 - v1.9
   - Fixed for the new game version.
 
