@@ -48,6 +48,15 @@ These settings are client specific:
 - `Force left hand key` (default: `None`): Key to force left hand.
 - `Force right hand key` (default: `None`): Key to force right hand.
 
+### Tips on different slots
+
+- Most items can be equipped as weapon or helmet (usually what works in item stands).
+- Armor items show up on their original slot, regardless of the equipped slot.
+- This can be used to wear multiple armor items that appear on the same slot.
+  - For example Drake Helmet to add horns to other helmets.
+- However chest items lose their "shirt" layer when equipped on other slots.
+  - This is especially useful when wearing multiple chest items.
+
 ## Credits
 
 Sources: [GitHub](https://github.com/JereKuusela/valheim-wearable_trophies)
